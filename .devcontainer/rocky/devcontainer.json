@@ -5,6 +5,7 @@
     "customizations": {
         "vscode": {
             "extensions": [
+                "xdebug.php-debug",
                 "onecentlin.laravel-extension-pack",
                 "Vue.volar"
             ]
