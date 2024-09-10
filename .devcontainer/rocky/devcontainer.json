@@ -1,0 +1,13 @@
+{
+    "dockerComposeFile": "compose.yml",
+    "service": "laravel",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "onecentlin.laravel-extension-pack",
+                "Vue.volar"
+            ]
+        }
+    }
+}
