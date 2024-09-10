@@ -1,6 +1,21 @@
 <script setup lang="ts">
 import { mdiClipboard, mdiFile } from '@mdi/js';
+import { type Ref, ref } from 'vue';
+import axios from "axios";
 
+const image: Ref<File | null> = ref(null)
+
+const handleClick = async () => {
+    const data = new FormData();
+    data.append('photo', image.value, image.value?.name);
+
+    const res = axios.post('/', data, {
+        headers: {
+            'Content-Type': `multipart/form-data;`
+        }
+    })
+    console.log()
+}
 
 </script>
 
@@ -17,10 +32,10 @@ import { mdiClipboard, mdiFile } from '@mdi/js';
                         label="変換先"
                         :items="['JPEG', 'PNG', 'WEBP', 'HEIC']"
                     />
-                    <v-file-input prepend-icon="" :prepend-inner-icon="mdiFile" label="ファイルを選択" accept="image/*" class="mt-16" chips/>
+                    <v-file-input v-model="image" prepend-icon="" :prepend-inner-icon="mdiFile" label="ファイルを選択" accept="image/*" class="mt-16" chips/>
                     <br>
 
-                    <v-btn block color="primary" height="70">変換</v-btn>
+                    <v-btn block color="primary" height="70" @click="handleClick">変換</v-btn>
                 </v-sheet>
             </v-row>
         </v-container>
