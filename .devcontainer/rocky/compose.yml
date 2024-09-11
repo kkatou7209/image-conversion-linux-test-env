@@ -1,18 +1,19 @@
-name: imagemagick-test-rocky
+name: image-conversion-linux-test-env
 
 services:
   laravel:
+    container_name: image-conversion-laravel
     build: 
       context: .
       dockerfile: Dockerfile
     volumes:
       - ../../laravel:/workspace:cached
-      - imagemagick-test-node_modules:/workspace/node_modules
-      - imagemagick-test-vendor:/workspace/vendor
+      - image-conversion-node_modules:/workspace/node_modules
+      - image-conversion-vendor:/workspace/vendor
     tty: true
     ports:
       - 5173:5173
 
 volumes:
-  imagemagick-test-node_modules:
-  imagemagick-test-vendor:
+  image-conversion-node_modules:
+  image-conversion-vendor:

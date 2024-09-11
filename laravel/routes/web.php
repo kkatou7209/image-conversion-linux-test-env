@@ -8,13 +8,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Imagick\Driver;
+use Maestroerror\HeicToJpg;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-Route::post('/', function() {
+Route::post('/', function(Request $request) {
     if ($request->hasFile('photo')) {
-        $image = $request->photo;
-        return $image->path();
+
+        $file = $request->photo;
+
+        $filename = $file->getClientOriginalName();
+
+        $extension = $file->getClientOriginalExtension();
+
+        $file->storeAs('images', $filename);
+
+        // return storage_path('app/images') . '/' . $filename;
+
+        $jpeg = HeicToJpg::convert(storage_path('app/images') . '/' . $filename)->get();
+
+        Storage::put($filename . '.jpg', $jpeg);
+
     }
-    $manager = new ImageManager(new Driver());
 });

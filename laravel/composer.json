@@ -8,7 +8,9 @@
         "php": "^8.2",
         "intervention/image": "^3.8",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "maestroerror/heif-converter": "^0.2.0",
+        "maestroerror/php-heic-to-jpg": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

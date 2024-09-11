@@ -7,14 +7,20 @@ const image: Ref<File | null> = ref(null)
 
 const handleClick = async () => {
     const data = new FormData();
-    data.append('photo', image.value, image.value?.name);
 
-    const res = axios.post('/', data, {
+    const blob = new Blob([image.value], { type: image.value.type })
+    console.log(blob)
+    data.append('photo', blob, image.value?.name);
+
+    const res = await axios.post('/', data, {
         headers: {
             'Content-Type': `multipart/form-data;`
         }
     })
-    console.log()
+
+    console.log(res.data);
+
+
 }
 
 </script>
@@ -28,13 +34,8 @@ const handleClick = async () => {
                         <h2 class="text-h4">画像変換</h2>
                     </div>
                     <br>
-                    <v-select
-                        label="変換先"
-                        :items="['JPEG', 'PNG', 'WEBP', 'HEIC']"
-                    />
                     <v-file-input v-model="image" prepend-icon="" :prepend-inner-icon="mdiFile" label="ファイルを選択" accept="image/*" class="mt-16" chips/>
                     <br>
-
                     <v-btn block color="primary" height="70" @click="handleClick">変換</v-btn>
                 </v-sheet>
             </v-row>
